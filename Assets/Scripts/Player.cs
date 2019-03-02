@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : MonoBehaviour
 {
@@ -17,12 +15,12 @@ public class Player : MonoBehaviour
 
         direction.Normalize();
 
-        if (IsBlocked(transform.position, direction))
+        if (this.IsBlocked(this.transform.position, direction))
         {
             return false;
         }
 
-        transform.Translate(direction);
+        this.transform.Translate(direction);
         return true;
     }
 

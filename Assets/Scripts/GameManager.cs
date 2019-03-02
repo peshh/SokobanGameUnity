@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.IO;
-using System.Linq;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -18,29 +14,29 @@ public class GameManager : MonoBehaviour
     private Player player;
     private bool IsLevelLoaded;
 
-    void Start()
+    private void Start()
     {
         this.ResetScene();
         this.AddLevelInput.SetActive(false);
         this.AddButton.SetActive(false);
     }
 
-    void Update()
+    private void Update()
     {
         Vector2 inputMove = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         inputMove.Normalize();
 
         if (inputMove.sqrMagnitude > 0.5)
         {
-            if (readyForInput)
+            if (this.readyForInput)
             {
-                readyForInput = false;
-                player.Move(inputMove);
+                this.readyForInput = false;
+                this.player.Move(inputMove);
             }
         }
         else
         {
-            readyForInput = true;
+            this.readyForInput = true;
         }
 
         if (this.IsLevelComplete())
@@ -52,7 +48,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    bool IsLevelComplete()
+    private bool IsLevelComplete()
     {
         Box[] boxes = GameObject.FindObjectsOfType<Box>();
 
@@ -75,7 +71,6 @@ public class GameManager : MonoBehaviour
         writer.WriteLine(';');
         writer.WriteLine(newLevel);
         writer.Close();
-        //this.LevelBuilder.Build();
         this.AddLevelInput.SetActive(false);
         this.AddButton.SetActive(false);
     }
@@ -88,16 +83,16 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel()
     {
-        LevelBuilder.NextLevel();
-        StartCoroutine(ResetSceneASync());
+        this.LevelBuilder.NextLevel();
+        StartCoroutine(this.ResetSceneASync());
     }
 
     public void ResetScene()
     {
-        StartCoroutine(ResetSceneASync());
+        StartCoroutine(this.ResetSceneASync());
     }
 
-    IEnumerator ResetSceneASync()
+    private IEnumerator ResetSceneASync()
     {
         this.IsLevelLoaded = false;
 
@@ -121,8 +116,8 @@ public class GameManager : MonoBehaviour
         }
 
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("LevelScene"));
-        LevelBuilder.Build();
-        player = FindObjectOfType<Player>();
+        this.LevelBuilder.Build();
+        this.player = FindObjectOfType<Player>();
         this.IsLevelLoaded = true;
     }
 }

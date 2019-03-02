@@ -1,25 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Box : MonoBehaviour
 {
-    void Start()
+    private void Start()
     {
-        TestForInSlot();
+        this.TestForInSlot();
     }
 
     public bool IsInSlot;
 
     public bool Move(Vector2 direction)
     {
-        if (IsBlocked(transform.position, direction))
+        if (this.IsBlocked(transform.position, direction))
         {
             return false;
         }
 
-        transform.Translate(direction);
-        TestForInSlot();
+        this.transform.Translate(direction);
+        this.TestForInSlot();
         return true;
     }
 
@@ -29,7 +27,7 @@ public class Box : MonoBehaviour
 
         foreach (var slot in slots)
         {
-            if (transform.position.x == slot.transform.position.x && transform.position.y == slot.transform.position.y)
+            if (this.transform.position.x == slot.transform.position.x && this.transform.position.y == slot.transform.position.y)
             {
                 GetComponent<SpriteRenderer>().color = Color.blue;
                 this.IsInSlot = true;

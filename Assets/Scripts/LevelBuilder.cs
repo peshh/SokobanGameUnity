@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -15,9 +14,9 @@ public class LevelBuilder : MonoBehaviour
     public List<LevelElement> LevelElements;
     private Level level;
 
-    GameObject GetPrefab(char c)
+    private GameObject GetPrefab(char c)
     {
-        LevelElement levelElement = LevelElements.Find(l => l.Character == c);
+        LevelElement levelElement = this.LevelElements.Find(l => l.Character == c);
 
         if (levelElement != null)
         {
@@ -31,9 +30,9 @@ public class LevelBuilder : MonoBehaviour
     {
         this.CurrentLevel++;
 
-        if (CurrentLevel == GetComponent<Levels>().LevelsList.Count)
+        if (this.CurrentLevel == GetComponent<Levels>().LevelsList.Count)
         {
-            CurrentLevel = 0;
+            this.CurrentLevel = 0;
         }
     }
 
@@ -56,7 +55,6 @@ public class LevelBuilder : MonoBehaviour
                     {
                         GameObject prefabSlot = this.GetPrefab('.');
                         Instantiate(prefabSlot, new Vector3(x, y, 0), Quaternion.identity);
-
                     }
                     Instantiate(prefab, new Vector3(x, y, 0), Quaternion.identity);
                 }

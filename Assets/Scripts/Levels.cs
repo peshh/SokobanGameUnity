@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 [System.Serializable]
@@ -42,20 +39,20 @@ public class Levels : MonoBehaviour
     public string FileName;
     public List<Level> LevelsList;
 
-    void Awake()
+    private void Awake()
     {
-        TextAsset textAsset = (TextAsset)Resources.Load(FileName);
+        TextAsset textAsset = (TextAsset)Resources.Load(this.FileName);
 
         string text = textAsset.text;
 
-        string[] levelsArr = text.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries);
+        string[] levelsArr = text.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
 
         foreach (var levelText in levelsArr)
         {
-            string[] levelArr = levelText.Split(new[] {'\n', '\r'}, StringSplitOptions.RemoveEmptyEntries);
+            string[] levelArr = levelText.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
             Level level = new Level();
             level.Rows = new List<string>(levelArr);
-            LevelsList.Add(level);
+            this.LevelsList.Add(level);
         }
     }
 }
