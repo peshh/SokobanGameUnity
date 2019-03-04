@@ -28,6 +28,7 @@ public class LevelBuilder : MonoBehaviour
 
     public void NextLevel()
     {
+        GetComponent<Levels>().AddNew();
         this.CurrentLevel++;
 
         if (this.CurrentLevel == GetComponent<Levels>().LevelsList.Count)

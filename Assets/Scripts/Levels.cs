@@ -41,6 +41,11 @@ public class Levels : MonoBehaviour
 
     private void Awake()
     {
+        this.AddNew();
+    }
+
+    public void AddNew()
+    {
         TextAsset textAsset = (TextAsset)Resources.Load(this.FileName);
 
         string text = textAsset.text;
