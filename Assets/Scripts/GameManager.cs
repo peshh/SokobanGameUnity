@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject AddLevelButton;
     public GameObject AddLevelInput;
     public GameObject AddButton;
+	public GameObject CancelButton;
     private bool readyForInput;
     private Player player;
     private bool IsLevelLoaded;
@@ -17,8 +18,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         this.ResetScene();
-        this.AddLevelInput.SetActive(false);
-        this.AddButton.SetActive(false);
+		this.ShowHideAddLevel(false);
     }
 
     private void Update()
@@ -47,6 +47,13 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+	
+	public void ShowHideAddLevel(bool showHide)
+	{
+		this.AddLevelInput.SetActive(showHide);
+        this.AddButton.SetActive(showHide);
+		this.CancelButton.SetActive(showHide);
+	}
 
     private bool IsLevelComplete()
     {
@@ -71,14 +78,7 @@ public class GameManager : MonoBehaviour
         writer.WriteLine(';');
         writer.WriteLine(newLevel);
         writer.Close();
-        this.AddLevelInput.SetActive(false);
-        this.AddButton.SetActive(false);
-    }
-
-    public void OpenNewLevelInputBox()
-    {
-        this.AddLevelInput.SetActive(true);
-        this.AddButton.SetActive(true);
+        this.ShowHideAddLevel(false);
     }
 
     public void NextLevel()
