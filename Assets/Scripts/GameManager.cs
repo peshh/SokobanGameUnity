@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject AddLevelButton;
     public GameObject AddLevelInput;
     public GameObject AddButton;
-	public GameObject CancelButton;
+    public GameObject CancelButton;
     private bool readyForInput;
     private Player player;
     private bool IsLevelLoaded;
@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         this.ResetScene();
-		this.ShowHideAddLevel(false);
+        this.ShowHideAddLevel(false);
     }
 
     private void Update()
@@ -39,21 +39,18 @@ public class GameManager : MonoBehaviour
             this.readyForInput = true;
         }
 
-        if (this.IsLevelComplete())
+        if (this.IsLevelComplete() && this.IsLevelLoaded)
         {
-            if (this.IsLevelLoaded)
-            {
-                this.NextLevel();
-            }
+            this.NextLevel();
         }
     }
-	
-	public void ShowHideAddLevel(bool showHide)
-	{
-		this.AddLevelInput.SetActive(showHide);
+
+    public void ShowHideAddLevel(bool showHide)
+    {
+        this.AddLevelInput.SetActive(showHide);
         this.AddButton.SetActive(showHide);
-		this.CancelButton.SetActive(showHide);
-	}
+        this.CancelButton.SetActive(showHide);
+    }
 
     private bool IsLevelComplete()
     {
